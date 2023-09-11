@@ -1,0 +1,41 @@
+name: Build and Deploy Note App
+on: 
+   Push:
+        branches: 
+                  -main
+
+jobs:
+    Build and Deploy Note App:
+                runs-on: ubuntu-latest
+steps:
+      -name: checkout code
+       uses: actions/checkout@v3
+
+      -name: Install and Test Client
+      working-directory: ./client/trial
+      run: | npm install
+
+      -name: Install and Test Server
+      working-directory: ./server
+      run: | npm install
+
+      #adding the continous deployment after that
+      -name: Build Client Docker Image
+      working-directory: ./client/trial
+      run: | docker build -t Dockerfile .
+
+      -name: Build Server Docker Image
+      working-directory: ./server
+      run: | docker build -t Dockerfile .
+
+      -name: Login to Docker Hub
+      uses: docker/login-actions@v2
+      with:
+            username: ${{secrets.Docker_UN}}
+            password: ${{secrets.Docker_P}}
+
+      -name: Push Image to Docker Hub
+          run: | 
+               -docker push notes_app_frontend
+               -docker push notes_app_backend
+                

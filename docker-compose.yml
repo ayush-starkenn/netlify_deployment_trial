@@ -1,0 +1,28 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: ./client/trial  # Replace with the path to your frontend code
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"  # Map host port 3000 to container port 80
+    volumes:
+      - ./client/trial:/app  # Map local frontend directory to /app in the container
+
+  backend:
+    build:
+      context: ./server  # Replace with the path to your backend code
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"  # Map host port 3001 to container port 3000
+    volumes:
+      - ./server:/app  # Map local backend directory to /app in the container
+    depends_on:
+      - mongodb
+  
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"  # Map host port 27017 to container port 27017
+    volumes:
+      - ./data:/data/db  # Map a volume for MongoDB data persistence
