@@ -19,6 +19,7 @@ const note = mongoose.model("note", schema);
 app.use("/postData", (req, res) => {
   const newNote = new note(req.body);
   const result = newNote.save();
+  console.log("sending the following results");
   res.send(result);
 });
 
