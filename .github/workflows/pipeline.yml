@@ -42,7 +42,7 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_UN }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_P }}
         run: |
-          cd frontend
+          cd client/trial
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
           docker build -t notes_fe_image_cicd .
           docker push notes_fe_image_cicd
