@@ -1,41 +1,66 @@
-name: Build and Deploy Note App
-on: 
-   Push:
-        branches: 
-                  -main
+name: MERN App Deployment
+
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-    Build and Deploy Note App:
-                runs-on: ubuntu-latest
-steps:
-      -name: checkout code
-       uses: actions/checkout@v3
+  build:
+    runs-on: ubuntu-latest
 
-      -name: Install and Test Client
-      working-directory: ./client/trial
-      run: | npm install
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      -name: Install and Test Server
-      working-directory: ./server
-      run: | npm install
+      # Set up Node.js for the backend build
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
 
-      #adding the continous deployment after that
-      -name: Build Client Docker Image
-      working-directory: ./client/trial
-      run: | docker build -t Dockerfile .
+      # Build and push the backend Docker image
+      - name: Build and push backend Docker image
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_UN }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_P }}
+        run: |
+          cd server
+          echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+          docker build -t notes_image_cicd .
+          docker push notes_image_cicd
 
-      -name: Build Server Docker Image
-      working-directory: ./server
-      run: | docker build -t Dockerfile .
+      # Set up Docker for the frontend build
+      - name: Set up Docker
+        uses: docker/setup-docker@v2
+        with:
+          docker-version: "20.10"
 
-      -name: Login to Docker Hub
-      uses: docker/login-actions@v2
-      with:
-            username: ${{secrets.Docker_UN}}
-            password: ${{secrets.Docker_P}}
+      # Build and push the frontend Docker image
+      - name: Build and push frontend Docker image
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_UN }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_P }}
+        run: |
+          cd frontend
+          echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+          docker build -t notes_fe_image_cicd .
+          docker push notes_fe_image_cicd
 
-      -name: Push Image to Docker Hub
-          run: | 
-               -docker push notes_app_frontend
-               -docker push notes_app_backend
-                
+  deploy:
+    needs: build
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # Set up Docker Compose
+      - name: Set up Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install python3-pip
+          sudo pip3 install docker-compose
+
+      # Deploy the services using Docker Compose
+      - name: Deploy services
+        run: |
+          docker-compose -f docker-compose.yml up -d
