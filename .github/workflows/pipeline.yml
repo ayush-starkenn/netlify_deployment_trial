@@ -41,7 +41,8 @@ jobs:
           DOCKER_PASSWORD: "@123ayayay"
         run: |
           cd ..
-          cd client\trial
+          cd client
+          cd trial
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
           docker build -t ayushgour/cicd-for-web-team:frontend .
           docker push ayushgour/cicd-for-web-team:frontend
