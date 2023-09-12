@@ -28,7 +28,7 @@ jobs:
           cd server
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
           docker build -t notes_image_cicd .
-          docker push notes_image_cicd
+          docker push ayushgour/cicd-for-web-team:backend
 
       # Set up Docker for the frontend build let's check them now
       - name: Set up Docker Buildx
@@ -37,13 +37,13 @@ jobs:
       # Build and push the frontend Docker image
       - name: Build and push frontend Docker image
         env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_UN }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_P }}
+          DOCKER_USERNAME: "ayushgour"
+          DOCKER_PASSWORD: "@123ayayay"
         run: |
           cd client/trial
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
           docker build -t notes_fe_image_cicd .
-          docker push notes_fe_image_cicd
+          docker push ayushgour/cicd-for-web-team:frontend
 
   deploy:
     needs: build
