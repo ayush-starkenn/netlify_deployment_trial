@@ -2,12 +2,12 @@ version: '3'
 services:
   frontend:
     build:
-      context: ./client/trial  # Replace with the path to your frontend code
+      context: ./client  # Replace with the path to your frontend code
       dockerfile: Dockerfile
     ports:
       - "3000:3000"  # Map host port 3000 to container port 80
     volumes:
-      - ./client/trial:/app  # Map local frontend directory to /app in the container
+      - ./client:/app  # Map local frontend directory to /app in the container
 
   backend:
     build:

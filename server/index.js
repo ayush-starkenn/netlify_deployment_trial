@@ -14,6 +14,7 @@ const schema = mongoose.Schema({
   title: { type: String, require: true },
 });
 
+//creating the new model for note
 const note = mongoose.model("note", schema);
 
 app.use("/postData", (req, res) => {
