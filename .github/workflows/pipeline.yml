@@ -59,4 +59,4 @@ jobs:
       # Deploy the services using Docker Compose
       - name: Deploy services
         run: |
-          docker-compose -f docker-compose.yml up -d .
+          docker-compose up.
