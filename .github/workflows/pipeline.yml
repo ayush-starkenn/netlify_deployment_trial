@@ -26,7 +26,7 @@ jobs:
           DOCKER_PASSWORD: "@123ayayay"
         run: |
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-          docker build -t ayushgour/cicd-for-web-team:backend ./server
+          docker build -t ayushgour/cicd-for-web-team:backend -f server/Dockerfile ./server
           docker push ayushgour/cicd-for-web-team:backend
 
       # Set up Docker for the frontend build
@@ -40,7 +40,7 @@ jobs:
           DOCKER_PASSWORD: "@123ayayay"
         run: |
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-          docker build -t ayushgour/cicd-for-web-team:frontend ./client/trial
+          docker build -t ayushgour/cicd-for-web-team:frontend -f client/trial/Dockerfile ./client/trial
           docker push ayushgour/cicd-for-web-team:frontend
 
   deploy:
