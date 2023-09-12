@@ -30,6 +30,8 @@ function App() {
 
   return (
     <div className="App">
+      <h1>Hello Users How are you</h1>
+      <br />
       <input
         type="text"
         placeholder="enter note"
