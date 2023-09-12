@@ -42,7 +42,7 @@ jobs:
         run: |
           cd client
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-          docker build -t ayushgour/cicd-for-web-team:frontend ./trial.
+          docker build -t ayushgour/cicd-for-web-team:frontend ./trial
           docker push ayushgour/cicd-for-web-team:frontend
 
   deploy:
