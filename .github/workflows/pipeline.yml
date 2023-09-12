@@ -58,5 +58,8 @@ jobs:
 
       # Deploy the services using Docker Compose
       - name: Deploy services
+        env:
+          GITHUB_DIR: "https://github.com/ayush09262001/cicd_completed"
         run: |
-          docker-compose -f /docker-compose.yml up -d
+          cd $GITHUB_DIR
+          docker-compose -f docker-compose.yml up -d
