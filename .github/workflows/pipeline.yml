@@ -30,7 +30,7 @@ jobs:
           docker build -t notes_image_cicd .
           docker push notes_image_cicd
 
-      # Set up Docker for the frontend build
+      # Set up Docker for the frontend build let's check them now
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
