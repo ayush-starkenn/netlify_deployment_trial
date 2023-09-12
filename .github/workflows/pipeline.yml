@@ -59,4 +59,5 @@ jobs:
       # Deploy the services using Docker Compose
       - name: Deploy services
         run: |
-          docker-compose up .
+          cd CICD
+          docker-compose -f docker-compose.yml up .
