@@ -60,4 +60,4 @@ jobs:
       - name: Deploy services
         run: |
           cd /
-          docker-compose up .
+          docker-compose -f docker-compose.yml up -d
