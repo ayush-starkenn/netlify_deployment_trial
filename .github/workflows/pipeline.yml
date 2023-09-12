@@ -22,8 +22,8 @@ jobs:
       # Build and push the backend Docker image
       - name: Build and push backend Docker image
         env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_UN }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_P }}
+          DOCKER_USERNAME: "ayushgour"
+          DOCKER_PASSWORD: "@123ayayay"
         run: |
           cd server
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
