@@ -59,4 +59,5 @@ jobs:
       # Deploy the services using Docker Compose
       - name: Deploy services
         run: |
+          cd /
           docker-compose up
