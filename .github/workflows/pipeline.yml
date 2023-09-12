@@ -28,7 +28,7 @@ jobs:
           cd server
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
           docker build -t notes_image_cicd .
-          docker push https://hub.docker.com/repository/docker/ayushgour/cicd-for-web-team : backend
+          docker push https://hub.docker.com/repository/docker/ayushgour/cicd-for-web-team:backend
 
       # Set up Docker for the frontend build
       - name: Set up Docker Buildx
@@ -43,7 +43,7 @@ jobs:
           cd client/trial
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
           docker build -t notes_fe_image_cicd .
-          docker push https://hub.docker.com/repository/docker/ayushgour/cicd-for-web-team : frontend
+          docker push https://hub.docker.com/repository/docker/ayushgour/cicd-for-web-team:frontend
 
   deploy:
     needs: build
