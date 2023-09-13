@@ -72,6 +72,7 @@ jobs:
           cd ./client
           export NETLIFY_AUTH_TOKEN=7gf6EjvNjkEZlBnXh31WZCIBSuVtCTm-BPuNXho3hCY
           netlify login
+          netlify link --name "cicd_completed"
           netlify deploy --prod
 
       # Deploy backend to Netlify
@@ -81,4 +82,5 @@ jobs:
           cd ./server
           export NETLIFY_AUTH_TOKEN=7gf6EjvNjkEZlBnXh31WZCIBSuVtCTm-BPuNXho3hCY
           netlify login
+          netlify link --name "cicd_completed"
           netlify deploy --prod
