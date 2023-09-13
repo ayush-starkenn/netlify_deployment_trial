@@ -68,14 +68,14 @@ jobs:
         uses: actions/checkout@v2
 
         #setup the netlify code
-        -name: Deploy frntend to netlify
+        - name: Deploy frntend to netlify
           run: |
               npm install -g netlify-cli
               cd ./client
               netlify login -t 7gf6EjvNjkEZlBnXh31WZCIBSuVtCTm-BPuNXho3hCY
               netlify deploy --prod
 
-        -name: Deploy backend to netlify
+        - name: Deploy backend to netlify
           run: |
               npm install -g netlify-cli
               cd ./server
