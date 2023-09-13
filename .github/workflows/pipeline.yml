@@ -76,7 +76,7 @@ jobs:
           export NETLIFY_AUTH_TOKEN=7gf6EjvNjkEZlBnXh31WZCIBSuVtCTm-BPuNXho3hCY
           netlify login
           netlify link --name "glistening-begonia-a3e8d7"
-          netlify deploy --prod
+          netlify deploy --prod --dir=client/build
 
       # Deploy backend to Netlify
 
