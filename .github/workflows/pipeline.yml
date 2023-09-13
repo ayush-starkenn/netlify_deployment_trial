@@ -23,7 +23,7 @@ jobs:
       - name: Build and push backend Docker image
         env:
           DOCKER_USERNAME: "ayushgour"
-          DOCKER_PASSWORD: "@123ayayay"
+          DOCKER_PASSWORD: "$123ayayay"
         run: |
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
           docker build -t ayushgour/cicd-pipeline-trial:backend ./server
@@ -37,7 +37,7 @@ jobs:
       - name: Build and push frontend Docker image
         env:
           DOCKER_USERNAME: "ayushgour"
-          DOCKER_PASSWORD: "@123ayayay"
+          DOCKER_PASSWORD: "$123ayayay"
         run: |
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
           docker build -t ayushgour/cicd-pipeline-trial:frontend ./client
@@ -51,6 +51,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       # Set up Docker Compose
       - name: Set up Docker Compose
         run: |
@@ -63,21 +64,19 @@ jobs:
         run: |
           cd config
           docker-compose -f docker-compose.yml up -d
-      
-      - name: Checkout code
-        uses: actions/checkout@v2
 
-        #setup the netlify code
-        - name: Deploy frntend to netlify
-          run: |
-              npm install -g netlify-cli
-              cd ./client
-              netlify login -t 7gf6EjvNjkEZlBnXh31WZCIBSuVtCTm-BPuNXho3hCY
-              netlify deploy --prod
+      # Deploy frontend to Netlify
+      - name: Deploy frontend to Netlify
+        run: |
+          npm install -g netlify-cli
+          cd ./client
+          netlify login -t 7gf6EjvNjkEZlBnXh31WZCIBSuVtCTm-BPuNXho3hCY
+          netlify deploy --prod
 
-        - name: Deploy backend to netlify
-          run: |
-              npm install -g netlify-cli
-              cd ./server
-              netlify login -t 7gf6EjvNjkEZlBnXh31WZCIBSuVtCTm-BPuNXho3hCY
-              netlify deploy --prod
+      # Deploy backend to Netlify
+      - name: Deploy backend to Netlify
+        run: |
+          npm install -g netlify-cli
+          cd ./server
+          netlify login -t 7gf6EjvNjkEZlBnXh31WZCIBSuVtCTm-BPuNXho3hCY
+          netlify deploy --prod
