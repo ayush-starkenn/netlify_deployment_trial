@@ -71,7 +71,7 @@ jobs:
         run: |
           npm install -g netlify-cli
           cd ./client
-          npm build
+          npm run build
           export NETLIFY_AUTH_TOKEN=7gf6EjvNjkEZlBnXh31WZCIBSuVtCTm-BPuNXho3hCY
           netlify login
           netlify link --name "glistening-begonia-a3e8d7"
@@ -83,7 +83,7 @@ jobs:
         run: |
           npm install -g netlify-cli
           cd ./server
-          npm build
+          npm run build
           export NETLIFY_AUTH_TOKEN=7gf6EjvNjkEZlBnXh31WZCIBSuVtCTm-BPuNXho3hCY
           netlify login
           netlify link --name "glistening-begonia-a3e8d7"
