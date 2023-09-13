@@ -1,0 +1,2 @@
+[build]
+  publish = "client/build"  # Replace with the actual path to your React frontend build directory
