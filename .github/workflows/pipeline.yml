@@ -69,14 +69,14 @@ jobs:
 
         #setup the netlify code
         -name: Deploy frntend to netlify
-         run: |
+          run: |
               npm install -g netlify-cli
               cd ./client
               netlify login -t 7gf6EjvNjkEZlBnXh31WZCIBSuVtCTm-BPuNXho3hCY
               netlify deploy --prod
 
         -name: Deploy backend to netlify
-         run: |
+          run: |
               npm install -g netlify-cli
               cd ./server
               netlify login -t 7gf6EjvNjkEZlBnXh31WZCIBSuVtCTm-BPuNXho3hCY
