@@ -66,20 +66,28 @@ jobs:
           docker-compose -f docker-compose.yml up -d
 
       # Deploy frontend to Netlify
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Deploy frontend to Netlify
         run: |
           npm install -g netlify-cli
           cd ./client
+          npm build
           export NETLIFY_AUTH_TOKEN=7gf6EjvNjkEZlBnXh31WZCIBSuVtCTm-BPuNXho3hCY
           netlify login
           netlify link --name "glistening-begonia-a3e8d7"
           netlify deploy --prod
 
       # Deploy backend to Netlify
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Deploy backend to Netlify
         run: |
           npm install -g netlify-cli
           cd ./server
+          npm build
           export NETLIFY_AUTH_TOKEN=7gf6EjvNjkEZlBnXh31WZCIBSuVtCTm-BPuNXho3hCY
           netlify login
           netlify link --name "glistening-begonia-a3e8d7"
