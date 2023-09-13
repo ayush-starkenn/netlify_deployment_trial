@@ -70,7 +70,8 @@ jobs:
         run: |
           npm install -g netlify-cli
           cd ./client
-          netlify login -t 7gf6EjvNjkEZlBnXh31WZCIBSuVtCTm-BPuNXho3hCY
+          export NETLIFY_AUTH_TOKEN=7gf6EjvNjkEZlBnXh31WZCIBSuVtCTm-BPuNXho3hCY
+          netlify login
           netlify deploy --prod
 
       # Deploy backend to Netlify
@@ -78,5 +79,6 @@ jobs:
         run: |
           npm install -g netlify-cli
           cd ./server
-          netlify login -t 7gf6EjvNjkEZlBnXh31WZCIBSuVtCTm-BPuNXho3hCY
+          export NETLIFY_AUTH_TOKEN=7gf6EjvNjkEZlBnXh31WZCIBSuVtCTm-BPuNXho3hCY
+          netlify login
           netlify deploy --prod
