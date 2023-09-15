@@ -65,8 +65,12 @@ jobs:
           cd config
           docker-compose -f docker-compose.yml up -d
 
-      # Deploy frontend to Netlify
+      # Deploy frontend to Netlify is a step
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
+        #deploy frontend
       - name: Deploy frontend to Netlify
         run: |
           npm install -g netlify-cli
@@ -78,8 +82,12 @@ jobs:
           netlify link --name "glistening-begonia-a3e8d7"
           netlify deploy --prod --dir=client/build
 
-      # Deploy backend to Netlify
+      # Deploy backend to Netlify is a step
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
+        #deploying backend on netlify
       - name: Deploy backend to Netlify
         run: |
           npm install -g netlify-cli
