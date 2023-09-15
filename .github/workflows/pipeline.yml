@@ -67,6 +67,9 @@ jobs:
 
       # Deploy frontend to Netlify is a step
       #deploy frontend
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Deploy frontend to Netlify
         run: |
           npm install -g netlify-cli
@@ -76,7 +79,7 @@ jobs:
           export NETLIFY_AUTH_TOKEN=7gf6EjvNjkEZlBnXh31WZCIBSuVtCTm-BPuNXho3hCY
           netlify login
           netlify link --name "glistening-begonia-a3e8d7"
-          netlify deploy --prod --dir=./build
+          netlify deploy --prod --dir=/client/build
 
       # Deploy backend to Netlify is a step
       #deploying backend on netlify
@@ -89,4 +92,4 @@ jobs:
           export NETLIFY_AUTH_TOKEN=7gf6EjvNjkEZlBnXh31WZCIBSuVtCTm-BPuNXho3hCY
           netlify login
           netlify link --name "glistening-begonia-a3e8d7"
-          netlify deploy --prod
+          netlify deploy --prod --dir=/server/build
